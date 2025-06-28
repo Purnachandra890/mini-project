@@ -7,7 +7,9 @@ const scriptRouter =require('./routes/script.js')
 const agentRouter=require('./routes/agents.js')
 const captionRouter=require('./routes/caption.js')
 const translateRouter=require('./routes/translate.js');
-const rewrite=require('./routes/rewrite.js')
+const rewrite=require('./routes/rewrite.js');
+const profile = require('./routes/profile.js');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -24,6 +26,8 @@ app.get('/', (req, res) => {
   app.use('/translate',translateRouter);
   app.use('/captions',captionRouter);
   app.use('/rewrite',rewrite);
+  app.use('/profile', profile);
+
 
 (async () => {
     await connectDB();

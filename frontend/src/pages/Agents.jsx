@@ -29,6 +29,14 @@ const Agents = () => {
           route="/agents/translate"
           buttonColor="green"
         />
+        <AgentCard
+          title="ThumbnailAgent"
+          description="Create Beautiful Thumbnails for your Videos"
+          tokens={400}
+          image="https://cdn-icons-png.flaticon.com/512/2201/2201566.png"
+          route="/agents/thumbnail"
+          buttonColor="blue"
+        />
         {/* Add more <AgentCard />s as needed */}
       </div>
     </div>
