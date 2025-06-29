@@ -37,16 +37,26 @@ const sessionSchema = new mongoose.Schema({
 });
 
 
+const imageGenSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  agentId: { type: mongoose.Schema.Types.ObjectId, ref: "Agent" }, // ✅ add this
+  prompt: String,
+  imageUrl: String,
+  timestamp: { type: Date, default: Date.now },
+});
 
 const User = mongoose.model('User', userSchema);
 const Agent = mongoose.model('Agent', agentSchema);
 const Chat = mongoose.model('Chat', chatSchema);
 const Session = mongoose.model("Session", sessionSchema);
+const ImageGen = mongoose.model("ImageGen", imageGenSchema);
+
 
 
 module.exports = {
     Agent,
     User,
     Chat,
-    Session
+    Session,
+    ImageGen
 }

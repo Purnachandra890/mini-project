@@ -9,6 +9,8 @@ const captionRouter=require('./routes/caption.js')
 const translateRouter=require('./routes/translate.js');
 const rewrite=require('./routes/rewrite.js');
 const profile = require('./routes/profile.js');
+const image_gen=require('./routes/imageGen.js')
+
 
 const app = express();
 
@@ -27,6 +29,7 @@ app.get('/', (req, res) => {
   app.use('/captions',captionRouter);
   app.use('/rewrite',rewrite);
   app.use('/profile', profile);
+  app.use('/generate-image',image_gen);
 
 
 (async () => {

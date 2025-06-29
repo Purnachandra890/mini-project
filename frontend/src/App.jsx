@@ -14,7 +14,7 @@ import TranslateAgent from "./agents/TranslateAgent"
 
 import NavbarLoggedIn from "./components/NavbarLoggedIn";
 import NavbarLoggedOut from "./components/NavbarLoggedOut";
-import ThumbnailAgent from "./agents/ThumbnailAgent";
+import ImageAgent from "./agents/ImageAgent";
 
 
 const App = () => {
@@ -38,7 +38,7 @@ const App = () => {
         <Route path="/agents/script" element={<ScriptAgent />} />
         <Route path="/agents/caption" element={<CaptionAgent />} />
         <Route path="/agents/translate" element={<TranslateAgent />} />
-        <Route path="/agents/thumbnail" element={<ThumbnailAgent />} />
+        <Route path="/agents/thumbnail" element={<ImageAgent />} />
 
 
         {/* Optional: Add this route if you have a profile page */}
