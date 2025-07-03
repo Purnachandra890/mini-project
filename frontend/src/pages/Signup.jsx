@@ -21,7 +21,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://mini-project-7mrd.onrender.com/auth/register', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
