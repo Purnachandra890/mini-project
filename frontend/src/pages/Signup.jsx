@@ -21,7 +21,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3060/auth/register', {
+      const response = await fetch('https://mini-project-7mrd.onrender.com/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
