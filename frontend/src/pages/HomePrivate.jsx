@@ -8,7 +8,7 @@ function HomePrivate() {
     <div className="flex flex-col md:flex-row h-auto md:h-screen bg-black text-white">
       
       {/* Left Side - Welcome Message */}
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start p-6 md:m-8 space-y-6 text-center md:text-left mt-28 md:mt-0">
+      <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start p-6 md:m-8 space-y-6 text-center md:text-left mt-32 md:mt-0">
         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight font-manrope">
           Welcome back, Creator! 👋
         </h1>
@@ -24,7 +24,7 @@ function HomePrivate() {
       </div>
 
       {/* Right Side - Robot */}
-      <div className="w-full md:w-1/2 h-72 md:h-4/5 flex items-center justify-center px-4 md:px-0 mb-6 md:mb-0 mt-24 md:mt-0">
+      <div className="w-full md:w-1/2 h-72 md:h-4/5 flex items-center justify-center px-4 md:px-0 mb-6 md:mb-0 mt-28 md:mt-0">
         <div className="w-full h-full">
           <Robot />
         </div>
