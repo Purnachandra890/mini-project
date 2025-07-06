@@ -6,34 +6,40 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  setLoading(true); // Start loading
 
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (!response.ok) {
-        alert(data.message || 'Login failed');
-        return;
-      }
-
-      localStorage.setItem('Authorization', `Bearer ${data.token}`);
-      navigate('/home');
-      window.location.reload();
-    } catch (error) {
-      console.error('Login error:', error);
-      alert('Server error. Please try again later.');
+    if (!response.ok) {
+      alert(data.message || 'Login failed');
+      setLoading(false); // Stop loading on error
+      return;
     }
-  };
+
+    localStorage.setItem('Authorization', `Bearer ${data.token}`);
+    navigate('/home');
+    window.location.reload();
+  } catch (error) {
+    console.error('Login error:', error);
+    alert('Server error. Please try again later.');
+    setLoading(false); // Stop loading on catch
+  }
+};
+
 
   return (
     <div className="flex flex-col md:flex-row bg-black min-h-screen text-white font-manrope">
@@ -71,10 +77,14 @@ const Login = () => {
             />
             <button
               type="submit"
-              className="bg-blue-500 text-white text-base md:text-xl font-semibold w-full py-4 rounded-2xl hover:bg-blue-600 transition"
+              disabled={loading}
+              className={`${
+                loading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+              } text-white text-base md:text-xl font-semibold w-full py-4 rounded-2xl transition`}
             >
-              Log In
+              {loading ? 'Loading...' : 'Log In'}
             </button>
+
           </form>
         </div>
       </div>
