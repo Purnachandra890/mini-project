@@ -8,6 +8,8 @@ const Signup = () => {
     email: '',
     password: '',
   });
+  const [loading, setLoading] = useState(false);
+
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -17,28 +19,32 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  setLoading(true); // Start loading
 
-    try {
-      const response = await fetch('http://localhost:3060/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+  try {
+    const response = await fetch('http://localhost:3060/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (response.ok) {
-        alert('User registered successfully!');
-        // navigate('/login');
-      } else {
-        alert(data.message || 'Registration failed');
-      }
-    } catch (err) {
-      console.error('Registration error:', err);
-      alert('Something went wrong');
+    if (response.ok) {
+      alert('User registered successfully!');
+      // navigate('/login');
+    } else {
+      alert(data.message || 'Registration failed');
     }
-  };
+  } catch (err) {
+    console.error('Registration error:', err);
+    alert('Something went wrong');
+  } finally {
+    setLoading(false); // Stop loading after response or error
+  }
+};
+
 
   return (
     <div className="flex flex-col md:flex-row bg-black text-white min-h-screen">
@@ -88,10 +94,14 @@ const Signup = () => {
             />
             <button
               type="submit"
-              className="bg-blue-500 text-white text-base font-semibold w-full py-4 rounded-2xl hover:bg-blue-600 transition"
+              disabled={loading}
+              className={`${
+                loading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+              } text-white text-base font-semibold w-full py-4 rounded-2xl transition`}
             >
-              Sign Up
+              {loading ? 'Loading...' : 'Sign Up'}
             </button>
+
           </form>
         </div>
       </div>
