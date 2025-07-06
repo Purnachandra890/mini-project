@@ -19,7 +19,7 @@ const Profile = () => {
         if (!stored) return;
         const token = stored.replace("Bearer ", "");
 
-        const res = await axios.get("http://localhost:3060/profile", {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -40,7 +40,7 @@ const Profile = () => {
       const token = stored.replace("Bearer ", "");
 
       const res = await axios.post(
-        "http://localhost:3060/profile/change-password",
+        `${import.meta.env.VITE_API_BASE_URL}/profile/change-password`,
         {
           currentPassword,
           newPassword,
