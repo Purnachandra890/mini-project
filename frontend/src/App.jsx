@@ -30,8 +30,10 @@ const App = () => {
       {isLoggedIn ? <NavbarLoggedIn /> : <NavbarLoggedOut />}
 
       <Routes>
-      {isLoggedIn ? <Route path="/home" element={<HomePrivate />} /> : <Route path="/" element={<HomePublic />} />}
-        
+     
+        <Route path="/" element={isLoggedIn ? <HomePrivate /> : <HomePublic />} />
+        <Route path="/home" element={isLoggedIn ? <HomePrivate /> : <HomePublic />} />
+   
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/agents" element={<Agents />} />
