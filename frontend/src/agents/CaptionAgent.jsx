@@ -9,6 +9,7 @@ const CaptionAgent = () => {
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState("");
   const [isRewriting, setIsRewriting] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const messagesEndRef = useRef(null); // ✅ scroll target
 
@@ -60,6 +61,7 @@ const CaptionAgent = () => {
     const userMessage = { sender: "user", text: userInput };
     setMessages((prev) => [...prev, userMessage]);
     setUserInput("");
+    setLoading(true); // 🔄 Show loading
 
     try {
       const res = await axios.post(
@@ -74,6 +76,15 @@ const CaptionAgent = () => {
       ]);
     } catch (err) {
       console.error("❌ Error sending prompt:", err);
+      setMessages((prev) => [
+        ...prev,
+        {
+          sender: "bot",
+          text: "⚠️ Failed to generate captions. Please try again.",
+        },
+      ]);
+    } finally {
+      setLoading(false); // ✅ Hide loading
     }
   };
 
@@ -144,7 +155,33 @@ const CaptionAgent = () => {
             <div className="whitespace-pre-line">{msg.text}</div>
           </div>
         ))}
-        {/* ✅ Scroll target at bottom */}
+
+        {loading && (
+          <div className="flex items-center text-white text-sm space-x-2">
+            <svg
+              className="animate-spin h-5 w-5 text-white"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16 8 8 0 01-8-8z"
+              ></path>
+            </svg>
+            <span>Generating captions...</span>
+          </div>
+        )}
+
         <div ref={messagesEndRef} />
       </div>
 
