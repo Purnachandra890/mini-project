@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+require("dotenv").config();
 
 async function connectDB() {
+    const MongoDbUrl=process.env.MongoDbUrl;
     try {
-        const response = await mongoose.connect('mongodb+srv://GenieAi:DOXq5BGEHMjFx8bQ@cluster0.gw5whgn.mongodb.net/');
+        const response = await mongoose.connect(MongoDbUrl);
         // mongodb+srv://kuttumurohit:iLlAhYRX00Qeovtm@cluster0.mongodb.net/?retryWrites=true&w=majority
 
         if (response) {
